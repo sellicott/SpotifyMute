@@ -12,7 +12,7 @@ elif platform == "darwin":
 elif platform == "win32":
     # Windows...`
     from Windows.win32_mute import mute_spotify
-    from comtypes import CoInitilize
+    from comtypes import CoInitialize
 
 
 def main():
@@ -40,7 +40,7 @@ def worker():
 
     # if using windows initilize COM for this thread
     if platform == "win32":
-        CoInitilize()
+        CoInitialize()
 
     while True:
 

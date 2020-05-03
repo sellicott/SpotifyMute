@@ -1,22 +1,17 @@
+#!/usr/bin/env python
 from SwSpotify import spotify, SpotifyPaused, SpotifyClosed, SpotifyNotRunning
 from threading import Thread
 from sys import exit, platform
-import atexit
+from time import sleep
 
-if platform == "linux" or platform == "linux2":
-    #Linux
-    from Linux.linux_mute import mute_spotify
-elif platform == "darwin":
-    # OS X
-    pass
-elif platform == "win32":
-    # Windows...`
-    from Windows.win32_mute import mute_spotify
+from SpotifyCrossMute import mute_spotify 
+
+if platform == "win32":
+    # Windows
     from comtypes import CoInitialize
 
 
 def main():
-    atexit.register(on_exit)
 
     t = Thread(target = worker, daemon=True)
     t.start()
@@ -30,9 +25,6 @@ def main():
         except KeyboardInterrupt:
             exit(0)
     
-def on_exit():
-    print("Stopping Mute Script")
-
 def worker():
     song_name = ""
     prev_song_name = ""
@@ -43,7 +35,8 @@ def worker():
         CoInitialize()
 
     while True:
-
+        # sleep for a while
+        sleep(0.5)
         try:
             song_name = spotify.song()
             error_printed = False
@@ -62,7 +55,7 @@ def worker():
         if song_name != prev_song_name:
             prev_song_name = song_name
             print(song_name)
-            if 'Advertisement' in song_name:
+            if 'Advertisement' in song_name or 'Spotify' in song_name:
                 mute_spotify(True)
                 print('Spotify Muted')
             else:

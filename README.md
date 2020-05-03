@@ -4,6 +4,17 @@ SwSpotify which gets the current track from Spotify. The application uses the op
 system to mute the Spotify application. This is Pulse Audio for Linux, the Windows 
 SimpleAudio API, and applescript for Mac.
 
+# Useage
+The script watches Spotify notifications to see what current song is playing, if it detects an
+ad, it will mute Spotify. To run the program execute:
+```
+python spotify_mute.py
+```
+in the directory where the script is located.
+
+The script will show the currently playing song, and tell if it has muted Spotify or not. It 
+will also display a message if Spotify is paused or closed.
+
 # Installation
 This script requires Python 3, you have to install that first.
 All platforms need SwSpotify, install it with

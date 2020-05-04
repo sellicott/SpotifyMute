@@ -19,11 +19,22 @@ def main():
     # main loop to detect user input
     while True:
         try:
-            input()
+            text = input()
         except EOFError:
             exit(0)
         except KeyboardInterrupt:
             exit(0)
+
+        if text == 'test-mute':
+            print('Test mute of spotify for 5 seconds')
+            mute_spotify(True)
+            print('Spotify muted....')
+            for i in range(5):
+                sleep(1)
+                print('...')
+            mute_spotify(False)
+            print('Spotify unmuted. End of test.')
+            text = ''
     
 def worker():
     song_name = ""

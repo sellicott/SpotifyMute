@@ -65,7 +65,7 @@ def worker():
 
         if song_name != prev_song_name:
             prev_song_name = song_name
-            print(song_name)
+            print('{}, {}'.format(song_name, spotify.artist()))
             if 'Advertisement' in song_name or 'Spotify' in song_name:
                 mute_spotify(True)
                 print('Spotify Muted')

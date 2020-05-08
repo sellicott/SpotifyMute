@@ -38,6 +38,7 @@ def main():
     
 def worker():
     song_name = ""
+    artist_name = ""
     prev_song_name = ""
     error_printed = False
 
@@ -49,7 +50,7 @@ def worker():
         # sleep for a while
         sleep(0.5)
         try:
-            song_name = spotify.song()
+            song_name, artist_name  = spotify.current()
             error_printed = False
             error_msg = ""
         except SpotifyPaused:
@@ -65,8 +66,8 @@ def worker():
 
         if song_name != prev_song_name:
             prev_song_name = song_name
-            print('{}, {}'.format(song_name, spotify.artist()))
-            if 'Advertisement' in song_name or 'Spotify' in song_name:
+            print('{}, {}'.format(song_name, artist_name))
+            if 'Advertisement' in song_name or 'Spotify' in song_name or artist_name == "":
                 mute_spotify(True)
                 print('Spotify Muted')
             else:

@@ -15,6 +15,9 @@ in the directory where the script is located.
 The script will show the currently playing song, and tell if it has muted Spotify or not. It 
 will also display a message if Spotify is paused or closed.
 
+On windows I highly recommend running the script in PowerShell over command prompt (`cmd`) 
+or Git Bash. When running with Git Bash, the script seems to miss adds significantly more often.
+
 # Installation
 This script requires Python 3, you have to install that first.
 All platforms need SwSpotify, install it with

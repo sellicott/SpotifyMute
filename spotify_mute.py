@@ -54,7 +54,10 @@ def worker():
             error_printed = False
             error_msg = ""
         except SpotifyPaused:
-            error_msg = "Spotify Paused"
+            error_msg = "Spotify Paused and Muted"
+            song_name = ""
+            # Sometimes spotify will list as paused when it is playing an ad
+            mute_spotify(True)
         except SpotifyClosed:
             error_msg = "Spotify Closed"
         except SpotifyNotRunning:
@@ -66,8 +69,8 @@ def worker():
 
         if song_name != prev_song_name:
             prev_song_name = song_name
-            print('{}, {}'.format(song_name, artist_name))
-            if 'Advertisement' in song_name or 'Spotify' in song_name or artist_name == "":
+            print('Song Name: {}\n\tArtist: {}'.format(song_name, artist_name))
+            if 'Advertisement' in song_name or 'Spotify' in song_name or artist_name == "" or song_name == "":
                 mute_spotify(True)
                 print('Spotify Muted')
             else:
